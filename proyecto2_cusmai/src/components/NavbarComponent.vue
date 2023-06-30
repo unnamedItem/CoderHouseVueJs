@@ -60,7 +60,7 @@ export default {
             return this.$route.params.user;
         },
         hasAdminRoles() {
-            return this.user.roles.some(rol => rol === ADMIN);
+            return this.user?.roles?.some(rol => rol === ADMIN);
         }
     },
     methods: {

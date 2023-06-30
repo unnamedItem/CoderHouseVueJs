@@ -35,6 +35,7 @@ export default {
         return {
             username: "",
             password: "",
+            email: "",
             errors: [],
             isSubmited: false,
         }
