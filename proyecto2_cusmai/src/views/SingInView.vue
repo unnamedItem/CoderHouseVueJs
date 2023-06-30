@@ -1,6 +1,6 @@
 <template>
     <b-container class="my-5">
-        <b-form @submit.prevent="login">
+        <b-form @submit.prevent="singIn">
             <b-form-group label="Username" label-for="username-input">
                 <b-input id="username-input" type="text" v-model="username" placeholder="username" required
                     :disabled="isSubmited"></b-input>
@@ -11,9 +11,14 @@
                     :disabled="isSubmited"></b-input>
             </b-form-group>
 
-            <small><b-link to="/singin">¿No tienes cuenta?</b-link></small>
+            <b-form-group label="Email" label-for="email-input">
+                <b-input id="email-input" type="email" v-model="email" placeholder="email" required
+                    :disabled="isSubmited"></b-input>
+            </b-form-group>
 
-            <b-button class="mt-2" block type="submit" variant="danger" :disabled="isSubmited">Login</b-button>
+            <small><b-link to="/login">¿Ya tienes cuenta?</b-link></small>
+
+            <b-button class="mt-2" block type="submit" variant="danger" :disabled="isSubmited">Regristrase</b-button>
         </b-form>
     </b-container>
 </template>
@@ -23,28 +28,28 @@
 const axios = require('axios')
 const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
 const endpoint = baseUrl + '/users';
+const roles = ["user"];
 
 export default {
     data() {
         return {
-            username: "admin",
-            password: "admin123",
+            username: "",
+            password: "",
             errors: [],
             isSubmited: false,
         }
     },
     methods: {
-        login() {
+        singIn() {
             this.isSubmited = true;
-            axios.get(endpoint)
+            axios.post(endpoint, { username: this.username, password: this.password, email: this.email, roles: roles })
                 .then((response) => {
-                    const users = response.data;
-                    const user = users.find(usr => usr.username === this.username && usr.password === this.password);
+                    const user = response.data;
                     if (user) {
                         localStorage.setItem("user", JSON.stringify(user));
-                        this.$router.push({name: "Home", params: { user: user ? user : null }});
+                        this.$router.push("/");
                     } else {
-                        this.errors.push("Usuario o contraseña equivocados");
+                        this.errors.push("No se pudo completar el registro");
                     }
                 })
                 .catch((err) => { console.error(`${err}`) })

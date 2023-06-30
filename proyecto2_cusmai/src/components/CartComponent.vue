@@ -21,7 +21,8 @@
                         </b-input-group-append>
 
                         <b-input-group-append>
-                            <b-button sm variant="outline-danger" @click="removeItem(product.id)"><b-icon icon="trash"></b-icon></b-button>
+                            <b-button sm variant="outline-danger" @click="removeItem(product.id)"><b-icon
+                                    icon="trash"></b-icon></b-button>
                         </b-input-group-append>
                     </b-input-group>
                 </b-col>

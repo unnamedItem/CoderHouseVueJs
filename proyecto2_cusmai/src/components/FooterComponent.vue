@@ -17,5 +17,10 @@ export default {
     width: 100%;
     padding: 40px;
     color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    z-index: 100;
 }
 </style>
