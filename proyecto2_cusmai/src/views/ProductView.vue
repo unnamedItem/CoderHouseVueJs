@@ -30,7 +30,7 @@ export default {
                     label: 'Precio',
                     sortable: false,
                     variant: "secondary",
-                    formatter: (val) => `$${val.toFixed(2)}`
+                    formatter: (val) => `$${(val || 0).toFixed(2)}`
                 },
                 {
                     key: 'maxPlayers',
