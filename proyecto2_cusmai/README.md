@@ -1,11 +1,5 @@
 # 1er_proyecto_final_cusmai
 
-- usuarios
-user: admin
-pass: admin123
-user: user
-pass: user123
-
 ## Project setup
 ```
 npm install
