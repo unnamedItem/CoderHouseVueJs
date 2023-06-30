@@ -39,7 +39,8 @@ export default {
         this.cartList[productIndex].quantity += 1;
       } else {
         this.cartList.push(product);
-        this.updateUserCart();
+        let user = this.$route.params.user;
+        user && this.updateUserCart(user);
       }
     },
     addItem(id) {
@@ -66,8 +67,7 @@ export default {
       localStorage.removeItem("user");
       this.$router.push({name: "Login", params: {user: null}});
     },
-    updateUserCart() {
-      let user = this.$route.params.user;
+    updateUserCart(user) {
       user.products = this.cartList.map(product => {
         let item = {};
         item[product.id] = product.quantity;
