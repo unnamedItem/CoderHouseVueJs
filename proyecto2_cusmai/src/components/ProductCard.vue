@@ -23,7 +23,7 @@ export default {
             this.$emit("addToCart", this.product.id);
         },
         handleInfoEvent() {
-            this.$router.push({ path: "Product", query: { id: this.product.id } });
+            this.$router.push({ name: "Product", query: { id: this.product.id }, params: { user: this.$route.params.user } });
         }
     },
 }

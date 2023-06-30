@@ -45,7 +45,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (!Object.keys(to.params).length) {
     const user = JSON.parse(localStorage.getItem("user"));
-    next({name: to.name, params: {user: user}});
+    next({name: to.name, params: {user: user}, query: to.query});
   }
   next()
 });
