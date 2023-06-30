@@ -14,7 +14,7 @@ import TheFooter from './components/FooterComponent.vue';
 const axios = require('axios');
 const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
 const endpointProducts = baseUrl + '/products';
-// const endpointUsers = baseUrl + '/users';
+const endpointUsers = baseUrl + '/users';
 
 export default {
   components: {
@@ -39,6 +39,7 @@ export default {
         this.cartList[productIndex].quantity += 1;
       } else {
         this.cartList.push(product);
+        this.updateUserCart();
       }
     },
     addItem(id) {
@@ -64,6 +65,17 @@ export default {
     logout() {
       localStorage.removeItem("user");
       this.$router.push({name: "Login", params: {user: null}});
+    },
+    updateUserCart() {
+      let user = this.$route.params.user;
+      user.products = this.cartList.map(product => {
+        let item = {};
+        item[product.id] = product.quantity;
+        return item;
+      });
+      axios.put(`${endpointUsers}/${user.id}`, user)
+        .then((response) => { console.log(response) })
+        .catch((err) => { console.error(`${err}`) })
     }
   }
 }
