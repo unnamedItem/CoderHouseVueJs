@@ -99,7 +99,7 @@ export default {
       } else {
         let productsIds = user.products;
         this.cartList = Object.entries(productsIds).map(([id, quantity]) => {
-          let product = this.products.find(prod => prod.id === id);
+          let product = JSON.parse(JSON.stringify(this.products.find(prod => prod.id === id)));
           if (product) {
             product.quantity = quantity;
             return product;
