@@ -44,11 +44,6 @@ export default {
         this.cartList[productIndex].quantity += 1;
       } else {
         this.cartList.push(product);
-<<<<<<< HEAD
-=======
-        let user = this.$route.params.user;
-        user && this.updateUserCart(user);
->>>>>>> 8508881ffa66addddfdb4d3da461cfde41b6d3cd
       }
       this.updateUserCart();
     },
