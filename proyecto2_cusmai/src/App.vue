@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TheNavbar :cartList="cartList" @logout="logout" />
-    <router-view id="router-view" @addToCart="addToCart($event)" @addItem="addItem($event)" @subItem="subItem($event)"
+    <router-view id="router-view" :cartList="cartList" @addToCart="addToCart($event)" @addItem="addItem($event)" @subItem="subItem($event)"
       @removeItem="removeItem($event)" />
     <TheFooter />
   </div>
@@ -27,6 +27,11 @@ export default {
       cartList: [],
     }
   },
+  computed: {
+    user() {
+      return this.$route.params.user;
+    }
+  },
   created() {
     this.getProducts();
   },
@@ -39,12 +44,13 @@ export default {
         this.cartList[productIndex].quantity += 1;
       } else {
         this.cartList.push(product);
-        this.updateUserCart();
       }
+      this.updateUserCart();
     },
     addItem(id) {
       const productIndex = this.cartList.findIndex(prod => prod.id === id);
       this.cartList[productIndex].quantity += 1;
+      this.updateUserCart();
     },
     subItem(id) {
       const productIndex = this.cartList.findIndex(prod => prod.id === id);
@@ -52,30 +58,61 @@ export default {
       if (this.cartList[productIndex].quantity <= 0) {
         this.cartList.splice(productIndex, 1);
       }
+      this.updateUserCart();
     },
     removeItem(id) {
       const productIndex = this.cartList.findIndex(prod => prod.id === id);
       this.cartList.splice(productIndex, 1);
+      this.updateUserCart();
     },
     getProducts() {
       axios.get(endpointProducts)
-        .then((response) => { this.products = response.data })
+        .then((response) => { 
+          this.products = response.data;
+          this.getCartList(this.$route.params.user);
+        })
         .catch((err) => { console.error(`${err}`) })
     },
     logout() {
       localStorage.removeItem("user");
-      this.$router.push({name: "Login", params: {user: null}});
+      this.$router.push({ name: "Login", params: { user: null } });
+    },
+    updateUserLocale(user) {
+      localStorage.setItem("user", JSON.stringify(user));
     },
     updateUserCart() {
       let user = this.$route.params.user;
-      user.products = this.cartList.map(product => {
-        let item = {};
-        item[product.id] = product.quantity;
-        return item;
-      });
-      axios.put(`${endpointUsers}/${user.id}`, user)
-        .then((response) => { console.log(response) })
-        .catch((err) => { console.error(`${err}`) })
+      let products = {};
+      if (user) {
+        this.cartList.forEach(product => { products[product.id] = product.quantity });
+        user.products = products;
+        axios.put(`${endpointUsers}/${user.id}`, user)
+          .then((response) => { this.updateUserLocale(response.data) })
+          .catch((err) => { console.error(`${err}`) })
+      } else {
+        localStorage.setItem("localCartList", JSON.stringify(this.cartList));
+      }
+    },
+    getCartList(user) {
+      if (!user) {
+        this.cartList = JSON.parse(localStorage.getItem("localCartList")) || [];
+      } else {
+        let productsIds = user.products;
+        this.cartList = Object.entries(productsIds).map(([id, quantity]) => {
+          let product = this.products.find(prod => prod.id === id);
+          if (product) {
+            product.quantity = quantity;
+            return product;
+          } else {
+            return null;
+          }
+        }).filter(prod => prod != null);
+      }
+    }
+  },
+  watch: {
+    user(value) {
+      this.getCartList(value);
     }
   }
 }

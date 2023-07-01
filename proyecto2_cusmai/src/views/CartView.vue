@@ -1,6 +1,6 @@
 <template>
     <b-container>
-        <CartComponent :cartList="[]" @addItem="addItem($event)" @subItem="subItem($event)"
+        <CartComponent :cartList="cartList" @addItem="addItem($event)" @subItem="subItem($event)"
             @removeItem="removeItem($event)" />
     </b-container>
 </template>
@@ -12,6 +12,9 @@ import CartComponent from '../components/CartComponent.vue';
 export default {
     components: {
         CartComponent,
+    },
+    props: {
+        cartList: Array,
     },
     methods: {
         addItem(id) {

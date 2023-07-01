@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="cartList.length > 0">
+        <div v-if="cartList?.length > 0">
             <b-row v-for="(product, index) in cartList" :key="index" class="cart-list">
                 <b-col cols="12"><em><b>{{ product.name }}</b></em></b-col>
                 <b-col cols="4">
