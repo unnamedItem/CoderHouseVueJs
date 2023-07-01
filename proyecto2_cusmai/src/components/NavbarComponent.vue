@@ -6,9 +6,9 @@
 
         <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-                <b-nav-item href="#">Clasicos</b-nav-item>
-                <b-nav-item href="#">Euros</b-nav-item>
-                <b-nav-item href="#">Party Games</b-nav-item>
+                <b-nav-item to="/">Clasicos</b-nav-item>
+                <b-nav-item to="/">Euros</b-nav-item>
+                <b-nav-item to="/">Party Games</b-nav-item>
             </b-navbar-nav>
 
             <b-navbar-nav class="ml-auto">
@@ -22,8 +22,8 @@
                     <template #button-content>
                         <em>Cuenta</em> <b-icon icon="person"></b-icon>
                     </template>
-                    <b-dropdown-item v-if="hasAdminRoles" href="#">Gestión Productos</b-dropdown-item>
-                    <b-dropdown-item v-if="hasAdminRoles" href="#">Gestión Usuarios</b-dropdown-item>
+                    <b-dropdown-item v-if="hasAdminRoles" to="/productmanagement">Gestión Productos</b-dropdown-item>
+                    <b-dropdown-item v-if="hasAdminRoles" to="/usermanagement">Gestión Usuarios</b-dropdown-item>
                     <b-dropdown-item @click="logout">Salir</b-dropdown-item>
                 </b-nav-item-dropdown>
 

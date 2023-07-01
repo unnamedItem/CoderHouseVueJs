@@ -5,6 +5,8 @@ import LoginView from '../views/LoginView'
 import SingInView from '../views/SingInView'
 import CartView from '../views/CartView'
 import ProductView from '../views/ProductView'
+import ProductManagement from '../views/ProductManagement'
+import UserManagement from '../views/UserManagement'
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,16 @@ const routes = [
     path: '/product',
     name: 'Product',
     component: ProductView
+  },
+  {
+    path: '/productmanagement',
+    name: 'ProductManagement',
+    component: ProductManagement
+  },
+  {
+    path: '/usermanagement',
+    name: 'UserManagement',
+    component: UserManagement
   },
 ]
 
