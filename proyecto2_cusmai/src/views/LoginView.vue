@@ -1,5 +1,6 @@
 <template>
     <b-container class="my-5">
+        <b-alert v-for="(error, index) in errors" :key="index" :show="true" variant="danger">{{ error }}</b-alert>
         <b-form @submit.prevent="login">
             <b-form-group label="Username" label-for="username-input">
                 <b-input id="username-input" type="text" v-model="username" placeholder="username" required
@@ -36,6 +37,7 @@ export default {
     methods: {
         login() {
             this.isSubmited = true;
+            this.errors = [];
             axios.get(endpoint)
                 .then((response) => {
                     const users = response.data;
@@ -46,8 +48,12 @@ export default {
                     } else {
                         this.errors.push("Usuario o contraseña equivocados");
                     }
+                    this.isSubmited = false;
                 })
-                .catch((err) => { console.error(`${err}`) })
+                .catch((err) => { 
+                    console.error(`${err}`);
+                    this.isSubmited = true;
+                })
         },
     }
 }

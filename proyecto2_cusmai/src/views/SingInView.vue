@@ -1,5 +1,6 @@
 <template>
     <b-container class="my-5">
+        <b-alert v-for="(error, index) in errors" :key="index" :show="true" variant="danger">{{ error }}</b-alert>
         <b-form @submit.prevent="singIn">
             <b-form-group label="Username" label-for="username-input">
                 <b-input id="username-input" type="text" v-model="username" placeholder="username" required
@@ -35,6 +36,7 @@ export default {
         return {
             username: "",
             password: "",
+            email: "",
             errors: [],
             isSubmited: false,
         }
