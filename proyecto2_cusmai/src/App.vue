@@ -34,6 +34,9 @@ export default {
   },
   created() {
     this.getProducts();
+    if (!this.$route.params.user) {
+      this.$router.push("login");
+    }
   },
   methods: {
     addToCart(id) {
