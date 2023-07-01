@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TheNavbar :cartList="cartList" @logout="logout" />
-    <router-view id="router-view" :cartList="cartList" @addToCart="addToCart($event)" @addItem="addItem($event)" @subItem="subItem($event)"
-      @removeItem="removeItem($event)" />
+    <router-view id="router-view" :cartList="cartList" @addToCart="addToCart($event)" @addItem="addItem($event)"
+      @subItem="subItem($event)" @removeAllItems="removeAllItems($event)" @removeItem="removeItem($event)" />
     <TheFooter />
   </div>
 </template>
@@ -65,9 +65,13 @@ export default {
       this.cartList.splice(productIndex, 1);
       this.updateUserCart();
     },
+    removeAllItems() {
+      this.cartList = [];
+      this.updateUserCart();
+    },
     getProducts() {
       axios.get(endpointProducts)
-        .then((response) => { 
+        .then((response) => {
           this.products = response.data;
           this.getCartList(this.$route.params.user);
         })

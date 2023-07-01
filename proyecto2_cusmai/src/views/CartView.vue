@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <CartComponent :cartList="cartList" @addItem="addItem($event)" @subItem="subItem($event)"
-            @removeItem="removeItem($event)" />
+            @removeAllItems="removeAllItems($event)" @removeItem="removeItem($event)" />
     </b-container>
 </template>
 
@@ -26,6 +26,9 @@ export default {
         removeItem(id) {
             this.$emit("removeItem", id);
         },
+        removeAllItems() {
+            this.$emit("removeAllItems");
+        }
     }
 }
 </script>

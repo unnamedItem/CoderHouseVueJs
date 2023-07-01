@@ -28,7 +28,14 @@
                 </b-col>
             </b-row>
 
-            <b-button block variant="danger">Finalizar compra</b-button>
+            <b-row class="d-flex justify-content-end mx-0 my-2">
+                <h2><b>Total: </b> <span>{{ totalPrice | monetary }}</span></h2>
+            </b-row>
+
+            <b-row>
+                <b-col cols="6"><b-button block @click="removeAllItems" variant="secondary">Limpiar Carrito</b-button></b-col>
+                <b-col cols="6"><b-button block variant="danger">Finalizar Compra</b-button></b-col>
+            </b-row>
         </div>
         <div v-else>
             <b-alert show variant="light" style="width:250px">
@@ -45,6 +52,16 @@ export default {
     props: {
         cartList: Array
     },
+    computed: {
+        totalPrice() {
+            return this.cartList.reduce((total, product) => total + Number(product.price) * product.quantity, 0);
+        }
+    },
+    filters: {
+        monetary(value) {
+            return `$${value.toFixed(2)}`;
+        }
+    },
     methods: {
         addItem(id) {
             this.$emit("addItem", id);
@@ -54,6 +71,9 @@ export default {
         },
         removeItem(id) {
             this.$emit("removeItem", id);
+        },
+        removeAllItems() {
+            this.$emit("removeAllItems");
         }
     }
 }
