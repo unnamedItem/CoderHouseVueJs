@@ -3,12 +3,12 @@
         <div v-if="cartList?.length > 0">
             <b-row v-for="(product, index) in cartList" :key="index" class="cart-list">
                 <b-col cols="12"><em><b>{{ product.name }}</b></em></b-col>
-                <b-col cols="4">
+                <b-col cols="3">
                     <div class="product-img">
                         <img :src="product.img" :alt="product.name" width="100" height="100" class="pr-2 pb-2">
                     </div>
                 </b-col>
-                <b-col cols="8" class="my-auto">
+                <b-col cols="6" class="my-auto">
                     <b-input-group>
                         <b-input-group-prepend>
                             <b-button sm variant="outline-danger" @click="subItem(product.id)">-</b-button>
@@ -25,6 +25,10 @@
                                     icon="trash"></b-icon></b-button>
                         </b-input-group-append>
                     </b-input-group>
+                </b-col>
+                <b-col cols="3" class="my-auto">
+                    <div><small><b>Unitario:</b> <span>{{ product.price | monetary }}</span></small></div>
+                    <div><small><b>Total:</b> <span>{{ product.price * product.quantity | monetary }}</span></small></div>
                 </b-col>
             </b-row>
 
