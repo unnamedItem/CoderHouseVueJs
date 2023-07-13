@@ -30,7 +30,7 @@ export default {
   computed: {
     user() {
       return this.$route.params.user;
-    }
+    },
   },
   created() {
     this.getProducts();
