@@ -13,10 +13,7 @@
 
 
 <script>
-const axios = require('axios')
-const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
-const endpoint = baseUrl + '/users';
-const ADMIN = "admin";
+import { userService } from '../_services/user.service';
 
 export default {
     data() {
@@ -44,18 +41,13 @@ export default {
         }
     },
     created() {
-        const hasAdminRoles = this.$route.params.user?.roles?.some(rol => rol === ADMIN);
-        if (!hasAdminRoles) {
-            this.$router.push({ name: "Home", params: { user: this.$route.params.user } });
-        } else {
-            this.getUsers();
-        }
+        this.getUsers();
     },
     methods: {
         getUsers() {
-            axios.get(endpoint)
+            userService.getAllUsers()
                 .then((response) => {
-                    this.usersList = response.data;
+                    this.usersList = response;
                     this.isLoading = false;
                 })
                 .catch((err) => { console.error(`${err}`) })

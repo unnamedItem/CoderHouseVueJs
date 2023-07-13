@@ -29,28 +29,19 @@ function login(username, password) {
 
 function singIn(userData) {
     return axios.post(endpoint, userData)
-        .then((response) => {
-            const user = response.data;
-            return user;
-        })
+        .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })
 }
 
 function getUserById(id) {
     return axios.get(`${endpoint}/${id}`)
-        .then((response) => {
-            const user = response.data;
-            return user;
-        })
+        .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })
 }
 
 function getAllUsers() {
     return axios.get(endpoint)
-        .then((response) => {
-            const users = response.data;
-            return users;
-        })
+        .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })
 }
 
@@ -66,12 +57,12 @@ function hasAdminRoles(id) {
 
 function updateUser(user) {
     return axios.put(`${endpoint}/${user.id}`, user)
-        .then((response) => { return response })
+        .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })
 }
 
 function deleteUser(user) {
     return axios.put(`${endpoint}/${user.id}`)
-        .then((response) => { return response })
+        .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })
 }

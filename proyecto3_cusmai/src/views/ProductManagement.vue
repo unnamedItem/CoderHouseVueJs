@@ -1,5 +1,5 @@
 <template>
-    <b-overlay :show="isLoading">
+    <b-overlay :show="!products.length">
         <b-container>
             <h2 class="text-left">Gestión de Productos</h2>
             <b-table :items="products" :fields="fields" striped>
@@ -17,15 +17,10 @@
 
 
 <script>
-const axios = require('axios')
-const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
-const endpoint = baseUrl + '/products';
-
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
-            products: [],
-            isLoading: true,
             fields: [
                 {
                     key: "img",
@@ -51,18 +46,10 @@ export default {
             ]
         }
     },
-    created() {
-        this.getProducts();
-    },
-    methods: {
-        getProducts() {
-            axios.get(endpoint)
-                .then((response) => {
-                    this.products = response.data;
-                    this.isLoading = false;
-                })
-                .catch((err) => { console.error(`${err}`) })
-        }
+    computed: {
+        ...mapState({
+            products: state => state.productModule.products,
+        })
     }
 }
 </script>
