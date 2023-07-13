@@ -15,6 +15,11 @@ export default {
     TheFooter,
     TheNavbar,
   },
+  created() {
+    if (!this.$store.state.accountModule.logged && this.$route.fullPath != "/login") {
+      this.$router.push({ name: "Login" });
+    }
+  }
 }
 </script>
 
