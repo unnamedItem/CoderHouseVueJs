@@ -20,7 +20,6 @@
 const axios = require('axios')
 const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
 const endpoint = baseUrl + '/products';
-const ADMIN = "admin";
 
 export default {
     data() {
@@ -53,12 +52,7 @@ export default {
         }
     },
     created() {
-        const hasAdminRoles = this.$route.params.user?.roles?.some(rol => rol === ADMIN);
-        if (!hasAdminRoles) {
-            this.$router.push({ name: "Home", params: { user: this.$route.params.user } });
-        } else {
-            this.getProducts();
-        }
+        this.getProducts();
     },
     methods: {
         getProducts() {

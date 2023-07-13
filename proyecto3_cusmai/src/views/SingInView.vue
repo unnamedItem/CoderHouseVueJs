@@ -3,17 +3,17 @@
         <b-alert v-for="(error, index) in errors" :key="index" :show="true" variant="danger">{{ error }}</b-alert>
         <b-form @submit.prevent="singIn">
             <b-form-group label="Username" label-for="username-input">
-                <b-input id="username-input" type="text" v-model="username" placeholder="username" required
+                <b-input id="username-input" type="text" v-model="form.username" placeholder="username" required
                     :disabled="isSubmited"></b-input>
             </b-form-group>
 
             <b-form-group label="Password" label-for="password-input">
-                <b-input id="password-input" type="password" v-model="password" placeholder="password" required
+                <b-input id="password-input" type="password" v-model="form.password" placeholder="password" required
                     :disabled="isSubmited"></b-input>
             </b-form-group>
 
             <b-form-group label="Email" label-for="email-input">
-                <b-input id="email-input" type="email" v-model="email" placeholder="email" required
+                <b-input id="email-input" type="email" v-model="form.email" placeholder="email" required
                     :disabled="isSubmited"></b-input>
             </b-form-group>
 
@@ -26,35 +26,30 @@
 
 
 <script>
-const axios = require('axios')
-const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
-const endpoint = baseUrl + '/users';
-const roles = ["user"];
+import { userService } from '../_services/user.service';
 
 export default {
     data() {
         return {
-            username: "",
-            password: "",
-            email: "",
             errors: [],
             isSubmited: false,
+            form: {
+                username: "",
+                password: "",
+                email: "",
+                roles: ["user"],
+            }
         }
     },
     methods: {
         singIn() {
             this.isSubmited = true;
-            axios.post(endpoint, { username: this.username, password: this.password, email: this.email, roles: roles })
-                .then((response) => {
-                    const user = response.data;
-                    if (user) {
-                        localStorage.setItem("user", JSON.stringify(user));
-                        this.$router.push("/");
-                    } else {
-                        this.errors.push("No se pudo completar el registro");
-                    }
+            userService.singIn(this.form)
+                .then(() => { this.$router.push({name: "Login"}) })
+                .catch((err) => { 
+                    this.errors.push(err.message);
+                    this.isSubmited = false;
                 })
-                .catch((err) => { console.error(`${err}`) })
         },
     }
 }

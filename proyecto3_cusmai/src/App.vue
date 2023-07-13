@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <TheNavbar :cartList="cartList" @logout="logout" />
-    <router-view id="router-view" :cartList="cartList" @addToCart="addToCart($event)" @addItem="addItem($event)"
-      @subItem="subItem($event)" @removeAllItems="removeAllItems($event)" @removeItem="removeItem($event)" />
-    <TheFooter />
+    <TheNavbar/>
+    <router-view id="router-view"/>
+    <TheFooter/>
   </div>
 </template>
 
@@ -20,23 +19,6 @@ export default {
   components: {
     TheFooter,
     TheNavbar,
-  },
-  data() {
-    return {
-      products: [],
-      cartList: [],
-    }
-  },
-  computed: {
-    user() {
-      return this.$route.params.user;
-    },
-  },
-  created() {
-    this.getProducts();
-    if (!this.$route.params.user) {
-      this.$router.push("login");
-    }
   },
   methods: {
     addToCart(id) {
@@ -82,7 +64,7 @@ export default {
     },
     logout() {
       localStorage.removeItem("user");
-      this.$router.push({ name: "Login", params: { user: null } });
+      this.$router.push({ name: "Login" });
     },
     updateUserLocale(user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -115,11 +97,6 @@ export default {
           }
         }).filter(prod => prod != null);
       }
-    }
-  },
-  watch: {
-    user(value) {
-      this.getCartList(value);
     }
   }
 }

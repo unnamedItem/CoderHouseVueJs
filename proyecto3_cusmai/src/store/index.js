@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { userService } from './account.module'
+import { accountModule } from './account.module'
+import { productModule } from './product.module'
+import { cartModule } from './cart.module'
 
 Vue.use(Vuex)
 
@@ -15,6 +17,8 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    userService
+    accountModule,
+    productModule,
+    cartModule,
   }
 })

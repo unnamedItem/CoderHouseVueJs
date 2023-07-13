@@ -21,10 +21,7 @@
 
 
 <script>
-const axios = require('axios')
-const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
-const endpoint = baseUrl + '/users';
-
+import { userService } from '../_services/user.service';
 export default {
     data() {
         return {
@@ -38,21 +35,11 @@ export default {
         login() {
             this.isSubmited = true;
             this.errors = [];
-            axios.get(endpoint)
-                .then((response) => {
-                    const users = response.data;
-                    const user = users.find(usr => usr.username === this.username && usr.password === this.password);
-                    if (user) {
-                        localStorage.setItem("user", JSON.stringify(user));
-                        this.$router.push({name: "Home", params: { user: user ? user : null }});
-                    } else {
-                        this.errors.push("Usuario o contraseña equivocados");
-                    }
-                    this.isSubmited = false;
-                })
+            userService.login(this.username, this.password)
+                .then(() => { this.$router.push({name: "Home"}) })
                 .catch((err) => { 
-                    console.error(`${err}`);
-                    this.isSubmited = true;
+                    this.errors.push(err.message);
+                    this.isSubmited = false;
                 })
         },
     }

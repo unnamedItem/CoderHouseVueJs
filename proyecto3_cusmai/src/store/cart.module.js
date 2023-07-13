@@ -1,4 +1,4 @@
-export const productModule = {
+export const cartModule = {
     state: {
     },
     getters: {
