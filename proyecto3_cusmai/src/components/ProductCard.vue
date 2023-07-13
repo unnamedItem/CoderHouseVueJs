@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         addToCart() {
-            this.$emit("addToCart", this.product.id);
+            
         },
         handleInfoEvent() {
             this.$router.push({ path: `/product/${this.product.id}` });

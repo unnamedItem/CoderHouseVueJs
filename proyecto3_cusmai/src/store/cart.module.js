@@ -1,5 +1,6 @@
 export const cartModule = {
     state: {
+      cart: []
     },
     getters: {
     },

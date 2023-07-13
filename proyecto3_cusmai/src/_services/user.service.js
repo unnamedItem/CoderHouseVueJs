@@ -19,17 +19,12 @@ function checkCredentials(username, password) {
 
 function login(username, password) {
     return axios.get(endpoint)
-        .then((response) => {
+        .then(response => {
             const users = response.data;
             const user = users.find(checkCredentials(username, password));
-            if (user) {
-                localStorage.setItem("userId", JSON.stringify(user.id));
-                return user;
-            } else {
-                throw new Error("Usuario o contraseña equivocados");
-            }
+            return user;
         })
-        .catch((err) => { throw err })
+        .catch((err) => { console.error(`${err}`) })
 }
 
 function singIn(userData) {

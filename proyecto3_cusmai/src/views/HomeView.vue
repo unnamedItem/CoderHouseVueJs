@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ProductList @addToCart="addToCart($event)" />
+        <ProductList/>
     </div>
 </template>
   
@@ -12,11 +12,6 @@ export default {
     components: {
         ProductList,
     },
-    methods: {
-        addToCart(id) {
-            this.$emit("addToCart", id);
-        },
-    }
 };
 </script>
   

@@ -42,33 +42,28 @@
 
 
 <script>
+import { mapActions, mapState } from 'vuex';
 const ADMIN = "admin";
 
 export default {
     name: "TheNavbar",
-    props: {
-        cartList: Array,
-    },
     computed: {
+        ...mapState({
+            cartList: state => state.cartModule.cart,
+            user: state => state.accountModule.user,
+            logged: state => state.accountModule.logged,
+        }),
         cartQuantity() {
             return this.cartList.reduce((total, product) => total + product.quantity, 0);
-        },
-        logged() {
-            return this.$route.params.user ? true : false;
-        },
-        user() {
-            return this.$route.params.user;
         },
         hasAdminRoles() {
             return this.user?.roles?.some(rol => rol === ADMIN);
         }
     },
     methods: {
+        ...mapActions("accountModule", ["logout"]),
         login() {
             this.$router.push("login");
-        },
-        logout() {
-            this.$emit("logout");
         }
     }
 }

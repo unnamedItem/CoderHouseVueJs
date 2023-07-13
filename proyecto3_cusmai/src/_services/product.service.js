@@ -11,13 +11,13 @@ export const productService = {
 
 function getProductById(id) {
     return axios.get(`${endpoint}/${id}`)
-        .then((response) => { return response.data })
+        .then((response) => { return response })
         .catch((err) => { console.error(`${err}`) })
 }
 
 function getAllProducts() {
     return axios.get(endpoint)
-        .then((response) => { return response })
+        .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })
 }
 

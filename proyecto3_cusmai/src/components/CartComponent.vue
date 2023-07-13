@@ -51,15 +51,16 @@
 
 
 <script>
+import { mapState } from 'vuex';
 export default {
     name: "CartComponent",
-    props: {
-        cartList: Array
-    },
     computed: {
         totalPrice() {
             return this.cartList.reduce((total, product) => total + Number(product.price) * product.quantity, 0);
-        }
+        },
+        ...mapState({
+            cartList: state => state.cartModule.cart,
+        })
     },
     filters: {
         monetary(value) {
@@ -77,7 +78,7 @@ export default {
             this.$emit("removeItem", id);
         },
         removeAllItems() {
-            this.$emit("removeAllItems");
+            
         }
     }
 }
