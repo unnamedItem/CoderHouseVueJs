@@ -15,9 +15,7 @@
 
 
 <script>
-const axios = require('axios');
-const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
-const endpoint = baseUrl + '/products';
+import { productService } from '@/_services/product.service';
 
 export default {
     data() {
@@ -52,17 +50,27 @@ export default {
             ]
         }
     },
+    props: {
+        id: String
+    },
     created() {
-        this.getProduct(this.$route.query.id);
+        this.getProduct();
     },
     methods: {
-        getProduct(id) {
-            axios.get(`${endpoint}/${id}`)
-                .then((response) => {
-                    this.product = response.data;
-                    this.isLoading = false;
+        getProduct() {
+            productService.getProductById(this.id)
+                .then(product => {
+                    if (product) {
+                        this.product = product;
+                        this.isLoading = false;
+                    } else {
+                        throw new Error("No se encontró el producto");
+                    }
                 })
-                .catch((err) => { console.error(`${err}`) })
+                .catch((err) => { 
+                    console.error(`${err}`);
+                    this.$router.push({ path: "/" });
+                })
         },
         addToCart() {
             this.$emit("addToCart", this.product.id);

@@ -9,6 +9,8 @@ export const userService = {
     getUserById,
     getAllUsers,
     hasAdminRoles,
+    updateUser,
+    deleteUser,
 }
 
 function checkCredentials(username, password) {
@@ -64,5 +66,17 @@ function hasAdminRoles(id) {
             const hasAdminRoles = user?.roles?.some(rol => rol === ADMIN);
             return hasAdminRoles;
         })
+        .catch((err) => { console.error(`${err}`) })
+}
+
+function updateUser(user) {
+    return axios.put(`${endpoint}/${user.id}`, user)
+        .then((response) => { return response })
+        .catch((err) => { console.error(`${err}`) })
+}
+
+function deleteUser(user) {
+    return axios.put(`${endpoint}/${user.id}`)
+        .then((response) => { return response })
         .catch((err) => { console.error(`${err}`) })
 }
