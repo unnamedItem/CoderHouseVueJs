@@ -1,7 +1,7 @@
 <template>
     <b-container class="my-5">
         <b-alert v-for="(error, index) in errors" :key="index" :show="true" variant="danger">{{ error }}</b-alert>
-        <b-form @submit.prevent="singIn">
+        <b-form @submit.prevent="handleSubmit">
             <b-form-group label="Username" label-for="username-input">
                 <b-input id="username-input" type="text" v-model="form.username" placeholder="username" required
                     :disabled="isSubmited"></b-input>
@@ -26,7 +26,7 @@
 
 
 <script>
-import { userService } from '../_services/user.service';
+import { mapActions } from 'vuex';
 
 export default {
     data() {
@@ -42,10 +42,11 @@ export default {
         }
     },
     methods: {
-        singIn() {
+        ...mapActions("accountModule", ["singIn"]),
+        handleSubmit() {
             this.isSubmited = true;
-            userService.singIn(this.form)
-                .then(() => { this.$router.push({name: "Login"}) })
+            this.singIn(this.form)
+                .then(() => { this.$router.push({name: "Home"}) })
                 .catch((err) => { 
                     this.errors.push(err.message);
                     this.isSubmited = false;
