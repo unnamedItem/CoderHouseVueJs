@@ -5,7 +5,7 @@
             <template #footer>
                 <b-button @click="handleInfoEvent" class="mx-1" variant="danger"><b-icon
                         icon="info-circle"></b-icon></b-button>
-                <b-button @click="addToCart" class="mx-1" variant="danger"><b-icon icon="cart"></b-icon></b-button>
+                <b-button @click="addToCart(product)" class="mx-1" variant="danger"><b-icon icon="cart"></b-icon></b-button>
             </template>
         </b-card>
     </div>
@@ -13,15 +13,14 @@
 
 
 <script>
+import { mapActions } from 'vuex';
 export default {
     name: "ProductCard",
     props: {
         product: Object
     },
     methods: {
-        addToCart() {
-            
-        },
+        ...mapActions("cartModule", ["addToCart"]),
         handleInfoEvent() {
             this.$router.push({ path: `/product/${this.product.id}` });
         }

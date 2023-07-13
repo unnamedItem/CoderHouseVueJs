@@ -1,42 +1,52 @@
 export const cartModule = {
+  namespaced: true,
   state: {
     cart: []
   },
   mutations: {
+    addToCart(state, product) {
+      state.cart.push(product);
+    },
+    addItem(state, idx) {
+      state.cart[idx].quantity += 1;
+    },
+    subItem(state, idx) {
+      state.cart[idx].quantity -= 1;
+      if (state.cart[idx].quantity <= 0) {
+        state.cart.splice(idx, 1);
+      }
+    },
+    removeItem(state, idx) {
+      state.cart.splice(idx, 1);
+    },
+    removeAllItems(state) {
+      state.cart = [];
+    },
   },
   actions: {
-    addToCart(id) {
-      let product = { ...this.products.find(prod => prod.id === id) };
-      const isAlreadyInCart = this.cartList.some(prod => prod.id === id);
+    addToCart({ state, commit }, product) {
+      const isAlreadyInCart = state.cart.some(prod => prod.id === product.id);
       if (isAlreadyInCart) {
-        const productIndex = this.cartList.findIndex(prod => prod.id === id);
-        this.cartList[productIndex].quantity += 1;
+        const productIndex = state.cart.findIndex(prod => prod.id === product.id);
+        commit("addItem", productIndex);
       } else {
-        this.cartList.push(product);
+        commit("addToCart", product);
       }
-      this.updateUserCart();
     },
-    addItem(id) {
-      const productIndex = this.cartList.findIndex(prod => prod.id === id);
-      this.cartList[productIndex].quantity += 1;
-      this.updateUserCart();
+    addItem({ state, commit }, product) {
+      const productIndex = state.cart.findIndex(prod => prod.id === product.id);
+      commit("addItem", productIndex)
     },
-    subItem(id) {
-      const productIndex = this.cartList.findIndex(prod => prod.id === id);
-      this.cartList[productIndex].quantity -= 1;
-      if (this.cartList[productIndex].quantity <= 0) {
-        this.cartList.splice(productIndex, 1);
-      }
-      this.updateUserCart();
+    subItem({ state, commit }, product) {
+      const productIndex = state.cart.findIndex(prod => prod.id === product.id);
+      commit("subItem", productIndex)
     },
-    removeItem(id) {
-      const productIndex = this.cartList.findIndex(prod => prod.id === id);
-      this.cartList.splice(productIndex, 1);
-      this.updateUserCart();
+    removeItem({ state, commit }, product) {
+      const productIndex = state.cart.findIndex(prod => prod.id === product.id);
+      commit("removeItem", productIndex)
     },
-    removeAllItems() {
-      this.cartList = [];
-      this.updateUserCart();
+    removeAllItems({ commit }) {
+      commit("removeAllItems")
     },
   },
 }

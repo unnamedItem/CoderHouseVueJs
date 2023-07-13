@@ -11,17 +11,17 @@
                 <b-col cols="6" class="my-auto">
                     <b-input-group>
                         <b-input-group-prepend>
-                            <b-button sm variant="outline-danger" @click="subItem(product.id)">-</b-button>
+                            <b-button sm variant="outline-danger" @click="subItem(product)">-</b-button>
                         </b-input-group-prepend>
 
                         <b-form-input sm disabled v-model="product.quantity" type="number" min="0"></b-form-input>
 
                         <b-input-group-append>
-                            <b-button sm variant="outline-success" @click="addItem(product.id)">+</b-button>
+                            <b-button sm variant="outline-success" @click="addItem(product)">+</b-button>
                         </b-input-group-append>
 
                         <b-input-group-append>
-                            <b-button sm variant="outline-danger" @click="removeItem(product.id)"><b-icon
+                            <b-button sm variant="outline-danger" @click="removeItem(product)"><b-icon
                                     icon="trash"></b-icon></b-button>
                         </b-input-group-append>
                     </b-input-group>
@@ -51,7 +51,7 @@
 
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 export default {
     name: "CartComponent",
     computed: {
@@ -68,18 +68,7 @@ export default {
         }
     },
     methods: {
-        addItem(id) {
-            this.$emit("addItem", id);
-        },
-        subItem(id) {
-            this.$emit("subItem", id);
-        },
-        removeItem(id) {
-            this.$emit("removeItem", id);
-        },
-        removeAllItems() {
-            
-        }
+        ...mapActions("cartModule", ["addItem", "subItem", "removeItem", "removeAllItems"]),
     }
 }
 </script>
