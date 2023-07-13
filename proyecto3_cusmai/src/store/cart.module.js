@@ -1,13 +1,42 @@
 export const cartModule = {
-    state: {
-      cart: []
+  state: {
+    cart: []
+  },
+  mutations: {
+  },
+  actions: {
+    addToCart(id) {
+      let product = { ...this.products.find(prod => prod.id === id) };
+      const isAlreadyInCart = this.cartList.some(prod => prod.id === id);
+      if (isAlreadyInCart) {
+        const productIndex = this.cartList.findIndex(prod => prod.id === id);
+        this.cartList[productIndex].quantity += 1;
+      } else {
+        this.cartList.push(product);
+      }
+      this.updateUserCart();
     },
-    getters: {
+    addItem(id) {
+      const productIndex = this.cartList.findIndex(prod => prod.id === id);
+      this.cartList[productIndex].quantity += 1;
+      this.updateUserCart();
     },
-    mutations: {
+    subItem(id) {
+      const productIndex = this.cartList.findIndex(prod => prod.id === id);
+      this.cartList[productIndex].quantity -= 1;
+      if (this.cartList[productIndex].quantity <= 0) {
+        this.cartList.splice(productIndex, 1);
+      }
+      this.updateUserCart();
     },
-    actions: {
+    removeItem(id) {
+      const productIndex = this.cartList.findIndex(prod => prod.id === id);
+      this.cartList.splice(productIndex, 1);
+      this.updateUserCart();
     },
-    modules: {
-    }
-  }
+    removeAllItems() {
+      this.cartList = [];
+      this.updateUserCart();
+    },
+  },
+}

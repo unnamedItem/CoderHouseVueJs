@@ -10,12 +10,13 @@ export const accountModule = {
     logged: userId ? true : false,
   },
   mutations: {
-    loadUser(state, user) {
+    login(state, user) {
       localStorage.setItem("userId", JSON.stringify(user.id));
       state.user = user;
       state.logged = true;
     },
     logout(state) {
+      localStorage.removeItem("userId");
       state.user = {};
       state.logged = false;
     }
@@ -25,28 +26,27 @@ export const accountModule = {
       return userService.login(username, password)
         .then(user => {
           if (user) {
-            commit("loadUser", user);
+            commit("login", user);
           } else {
             throw new Error("Usuario o contraseña equivocados");
           }
         })
         .catch(err => { throw err })
     },
+    logout({commit}) {
+      commit("logout");
+    },
     singIn({ commit }, userData) {
       return userService.singIn(userData)
         .then(user => {
           console.log(user)
           if (user) {
-            commit("loadUser", user);
+            commit("login", user);
           } else {
             throw new Error("No se pudo completar el registro");
           }
         })
         .catch(err => { throw err })
     },
-    logout({commit}) {
-      localStorage.removeItem("userId");
-      commit("logout");
-    }
   }
 }
