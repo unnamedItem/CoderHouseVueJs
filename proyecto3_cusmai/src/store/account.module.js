@@ -1,7 +1,7 @@
 import { userService } from "@/_services/user.service"
 
 const userId = JSON.parse(localStorage.getItem("userId"));
-const user = userId ? await userService.getUserById(userId) : {}; 
+const user = userId ? await userService.getUserById(userId) : {};
 
 export const accountModule = {
   namespaced: true,
@@ -19,6 +19,9 @@ export const accountModule = {
       localStorage.removeItem("userId");
       state.user = {};
       state.logged = false;
+    },
+    loadUser(state, user) {
+      state.user = user;
     }
   },
   actions: {
@@ -33,13 +36,12 @@ export const accountModule = {
         })
         .catch(err => { throw err })
     },
-    logout({commit}) {
+    logout({ commit }) {
       commit("logout");
     },
     singIn({ commit }, userData) {
       return userService.singIn(userData)
         .then(user => {
-          console.log(user)
           if (user) {
             commit("login", user);
           } else {
@@ -48,5 +50,11 @@ export const accountModule = {
         })
         .catch(err => { throw err })
     },
+    updateUserCart({ state, commit }, cart) {
+      let userCopy = JSON.parse(JSON.stringify(state.user));
+      userCopy.products = JSON.stringify(cart);
+      userService.updateUser(userCopy)
+        .then(user => { commit("loadUser", user) })
+    }
   }
 }
