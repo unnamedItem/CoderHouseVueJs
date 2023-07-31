@@ -1,5 +1,5 @@
 const axios = require('axios');
-const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
+const baseUrl = process.env.VUE_APP_MOCKAPI_URL_USERS;
 const endpoint = baseUrl + '/users';
 const ADMIN = "admin";
 
@@ -11,6 +11,10 @@ export const userService = {
     hasAdminRoles,
     updateUser,
     deleteUser,
+    createUserCart,
+    getUserCart,
+    updateUserCart,
+    clearUserCart,
 }
 
 function checkCredentials(username, password) {
@@ -62,7 +66,32 @@ function updateUser(user) {
 }
 
 function deleteUser(user) {
-    return axios.put(`${endpoint}/${user.id}`)
+    return axios.delete(`${endpoint}/${user.id}`)
+        .then((response) => { return response.data })
+        .catch((err) => { console.error(`${err}`) })
+}
+
+function createUserCart(id) {
+    return axios.post(`${endpoint}/${id}/cart`)
+        .then((response) => { return response.data })
+        .catch((err) => { console.error(`${err}`) })
+}
+
+function getUserCart(id) {
+    return axios.get(`${endpoint}/${id}/cart`)
+        .then((response) => { return response.data[0] })
+        .catch((err) => { console.error(`${err}`) })
+}
+
+function updateUserCart(id, cart, cartId) {
+    console.log(cartId)
+    return axios.put(`${endpoint}/${id}/cart/${cartId}`, cart)
+        .then((response) => { return response.data })
+        .catch((err) => { console.error(`${err}`) })
+}
+
+function clearUserCart(id, cartId) {
+    return axios.put(`${endpoint}/${id}/cart/${cartId}`, { cart: [] })
         .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })
 }

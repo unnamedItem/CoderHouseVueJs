@@ -2,22 +2,29 @@ import { userService } from "@/_services/user.service"
 
 const userId = JSON.parse(localStorage.getItem("userId"));
 const user = userId ? await userService.getUserById(userId) : {};
+const cart = userId ? await userService.getUserCart(userId) : [];
 
 export const accountModule = {
   namespaced: true,
   state: {
     user: user,
+    cart: cart.cart,
+    cartId: cart.id,
     logged: userId ? true : false,
   },
   mutations: {
-    login(state, user) {
+    login(state, { user, cart }) {
       localStorage.setItem("userId", JSON.stringify(user.id));
       state.user = user;
+      state.cart = cart.cart;
+      state.cartId = cart.id;
       state.logged = true;
     },
     logout(state) {
       localStorage.removeItem("userId");
       state.user = {};
+      state.cart = [];
+      state.cartId = null;
       state.logged = false;
     },
     loadUser(state, user) {
@@ -29,7 +36,9 @@ export const accountModule = {
       return userService.login(username, password)
         .then(user => {
           if (user) {
-            commit("login", user);
+            userService.getUserCart(user.id)
+              .then((userCart) => { commit("login", { user: user, cart: userCart }) })
+              .catch(err => { throw err })
           } else {
             throw new Error("Usuario o contraseña equivocados");
           }
@@ -43,7 +52,9 @@ export const accountModule = {
       return userService.singIn(userData)
         .then(user => {
           if (user) {
-            commit("login", user);
+            userService.createUserCart(user.id)
+              .then((userCart) => { commit("login", { user: user, cart: userCart }) })
+              .catch(err => { throw err })
           } else {
             throw new Error("No se pudo completar el registro");
           }

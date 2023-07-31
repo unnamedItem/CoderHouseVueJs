@@ -1,5 +1,5 @@
 const axios = require('axios');
-const baseUrl = process.env.VUE_APP_MOCKAPI_URL;
+const baseUrl = process.env.VUE_APP_MOCKAPI_URL_PRODUCTS;
 const endpoint = baseUrl + '/products';
 
 export const productService = {
