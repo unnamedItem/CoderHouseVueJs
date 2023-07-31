@@ -1,10 +1,24 @@
-
 # 1er_proyecto_final_cusmai
 
-# Credenciales de usuario
+## Project setup
+```
+npm install
+```
 
-- user: admin
-- pass: admin123
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-- user: user
-- pass: user123
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
