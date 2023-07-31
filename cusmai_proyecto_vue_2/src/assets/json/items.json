@@ -1,0 +1,98 @@
+[
+    {
+      "id": 1,
+      "name": "THE RED CATHEDRAL",
+      "img": "https://cf.geekdo-images.com/-PuiCnbxlBzMSjnUegp9AQ__itemrep/img/4GWO2HLGlp7XoMEmVvtu6DNa5l4=/fit-in/246x300/filters:strip_icc()/pic5556025.jpg",
+      "price": 16900.00,
+      "desc": "El otoño no es el mejor momento para subir a un andamio en Moscú, pero es mucho mejor que hacerlo en invierno. El zar Iván quiere ver resultados y nuestro equipo le demostrará que somos los mejores constructores de la ciudad. Estamos seguros de rematar esos arcos decorativos con las piedras más brillantes y relucientes y asegurar nuestro lugar en la lista de trabajadores de confianza del gobierno.",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["euro"]
+    },
+    {
+      "id": 2,
+      "name": "TZOLK'IN",
+      "img": "https://cf.geekdo-images.com/kXf7mDyDYuHg6oe8yTUIEA__itemrep/img/8M-vck69HAdoJdStBZ8q91-7hRs=/fit-in/246x300/filters:strip_icc()/pic4604439.jpg",
+      "price": 26900.00,
+      "desc": "Los mayas hicieron gala de una civilización muy desarrollada, conocida por sus incomparables manifestaciones artísticas, compleja arquitectura, sofisticadas matemáticas y un profundo conocimiento del universo observable.",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["euro"]
+    },
+    {
+      "id": 3,
+      "name": "ARKHAM HORROR 3ª EDICIÓN",
+      "img": "https://cf.geekdo-images.com/09KeqyJEtu2qcskbtlOhqw__itemrep/img/s0-oHJmWc3FTF1py6zFA_z4d1aE=/fit-in/246x300/filters:strip_icc()/pic5726297.jpg",
+      "price": 38750.00,
+      "desc": "Nos encontramos en 1926, en pleno apogeo de los tumultuosos Años Veinte. Chicas frívolas danzan hasta el amanecer en garitos clandestinos llenos de humo, consumiendo bebidas alcohólicas suministradas por mafiosos y contrabandistas. Son los años posteriores a la guerra que debía haber acabado con todas las guerras, y es el momento de celebrar.",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["co-op"]
+    },
+    {
+      "id": 4,
+      "name": "PICTO PALABRAS MULTIVERSO",
+      "img": "https://cf.geekdo-images.com/IO5DsyHpGD2P_PxgJS82kg__itemrep/img/A4DS01aw2s31RDugvaGBnNcqrOE=/fit-in/246x300/filters:strip_icc()/pic7323782.jpg",
+      "price": 3900.00,
+      "desc": "En este juego los jugadores se deben desafiar a buscar palabras y conceptos en las imágenes desplegadas, a partir de una categoría dada. Quien encuentra más palabras, que los otros no hayan encontrado, va sumando puntos. Las palabras repetidas entre los jugadores se tachan.. así que ser original es un plus en este juego (y en la vida)",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["party"]
+    },
+    {
+      "id": 5,
+      "name": "CODIGO SECRETO",
+      "img": "https://cf.geekdo-images.com/F_KDEu0GjdClml8N7c8Imw__itemrep/img/e8zw8YQvQB8q8zfWkHQ48Ls920g=/fit-in/246x300/filters:strip_icc()/pic2582929.jpg",
+      "price": 15400.00,
+      "desc": "El jefe de la red de espías dice “Fiebre: 2”. ¿Sabrías encontrar las dos palabras relacionadas con “fiebre” que te harán ganar la partida?",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["party"]
+    },
+    {
+      "id": 6,
+      "name": "¡RESCATE!",
+      "img": "https://cf.geekdo-images.com/v6bTbxeprDFj1nN4AenvjA__itemrep/img/Vw7DmPfr-ySMAI5QaBKHVD-un7M=/fit-in/246x300/filters:strip_icc()/pic1129370.jpg",
+      "price": 19600.00,
+      "desc": "¡Rescate! es un juego cooperativo de lucha contra el fuego. Los jugadores son un equipo de bomberos que acude a un incendio con el objetivo de rescatar a todos los ocupantes de un edificio. A lo largo de la partida el fuego se extenderá a menos que los jugadores se dediquen a extinguirlo, aunque el tiempo apremia y lo fundamental es poner a todo el mundo a salvo antes de que el fuego colapse el edificio. El juego incorpora una versión de juego avanzado en el que los personajes tienen capacidades especiales, se incorporan vehículos y también materiales especialmente inflamables. El juego incluye también un segundo tablero con un plano de un edificio diferente para hacer el juego siempre imprevisible.",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["co-op"]
+    },
+    {
+      "id": 7,
+      "name": "LACRIMOSA",
+      "img": "https://cf.geekdo-images.com/0aS85HPSKKGHGVvWQEEZew__itemrep/img/amOfj5N8ULLbVvDQNwpRjsKBoQw=/fit-in/246x300/filters:strip_icc()/pic6795274.jpg",
+      "price": 40000.00,
+      "desc": "Wolfgang Amadeus Mozart ha muerto. Su última acción consciente en su lecho de muerte fue componer el movimiento Lacrimosa de su Opus Requiem. Usted, como uno de sus padrinos, se reunirá con la viuda para participar por última vez en la financiación de las obras del genio austriaco. También rememorarás y volverás a contar todos tus recuerdos junto a Mozart, para asegurarte de que te retrata bajo la mejor luz cuando escriba sus memorias, y entrar en la historia como el mecenas más importante de Mozart.",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["euro"]
+    },
+    {
+      "id": 8,
+      "name": "CATAN",
+      "img": "https://cf.geekdo-images.com/W3Bsga_uLP9kO91gZ7H8yw__itemrep/img/IzYEUm_gWFuRFOL8gQYqGm5gU6A=/fit-in/246x300/filters:strip_icc()/pic2419375.jpg",
+      "price": 3750,
+      "desc": "Catan es un juego de mesa para toda la familia que se ha convertido en un fenómeno mundial. Desde su aparición en Alemania ha vendido más que muchos de los juegos más tradicionales.",
+      "quantity": 1,
+      "gameTime": 90,
+      "maxPlayers": 8,
+      "minPlayers": 2,
+      "tags": ["euro"]
+    }
+]
