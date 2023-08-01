@@ -50,7 +50,8 @@ export const cartModule = {
         const productIndex = state.cart.findIndex(prod => prod.id === product.id);
         commit("addItem", { idx: productIndex, userId: rootState.accountModule.user.id, cartId: rootState.accountModule.cartId });
       } else {
-        commit("addToCart", { product: product, userId: rootState.accountModule.user.id, cartId: rootState.accountModule.cartId });
+        let productCopy = JSON.parse(JSON.stringify(product));
+        commit("addToCart", { product: productCopy, userId: rootState.accountModule.user.id, cartId: rootState.accountModule.cartId });
       }
     },
     addItem({ state, commit, rootState }, product) {

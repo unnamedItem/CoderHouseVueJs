@@ -6,12 +6,14 @@ import SingInView from '../views/SingInView'
 import CartView from '../views/CartView'
 import ProductView from '../views/ProductView'
 import ProductManagement from '../views/ProductManagement'
+import ProductManagementForm from '../views/ProductManagementForm'
 import UserManagement from '../views/UserManagement'
+import UserManagementForm from '../views/UserManagementForm'
 import { userService } from '@/_services/user.service'
 
 Vue.use(VueRouter)
 
-const checkRoles = async function(to, from, next) {
+const checkRoles = async function (to, from, next) {
   const userId = JSON.parse(localStorage.getItem("userId"));
   userService.hasAdminRoles(userId)
     .then(hasAdminRoles => {
@@ -21,7 +23,7 @@ const checkRoles = async function(to, from, next) {
         next();
       }
     })
-    .catch((err) => { 
+    .catch((err) => {
       console.error(`${err}`);
       return next("/login");
     })
@@ -61,11 +63,25 @@ const routes = [
     beforeEnter: checkRoles,
   },
   {
+    path: '/productmanagement/form/:id',
+    name: 'ProductManagementForm',
+    component: ProductManagementForm,
+    props: true,
+    beforeEnter: checkRoles,
+  },
+  {
     path: '/usermanagement',
     name: 'UserManagement',
     component: UserManagement,
     beforeEnter: checkRoles,
   },
+  {
+    path: '/usermanagement/form/:id',
+    name: 'UserManagementForm',
+    component: UserManagementForm,
+    props: true,
+    beforeEnter: checkRoles,
+  }
 ]
 
 const router = new VueRouter({

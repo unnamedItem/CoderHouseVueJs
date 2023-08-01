@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="danger">
-    <b-navbar-brand to="/">Tienda de juegos</b-navbar-brand>
+    <b-navbar-brand to="/">Mercado de Juegos</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -18,7 +18,7 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto" @submit.prevent="handleSearch">
-        <b-nav-form>
+        <b-nav-form class="mr-3">
           <b-form-input
             size="sm"
             class="mr-sm-2"
@@ -32,15 +32,17 @@
 
         <b-nav-item-dropdown right v-if="logged">
           <template #button-content>
-            <em>Cuenta: {{ user.username }}</em> <b-icon icon="person"></b-icon>
+            <em>{{ user.username }}</em> <b-icon icon="person"></b-icon>
           </template>
+          <b-dropdown-header v-if="hasAdminRoles">Gestión</b-dropdown-header>
           <b-dropdown-item v-if="hasAdminRoles" to="/productmanagement"
-            >Gestión Productos</b-dropdown-item
+            >Productos</b-dropdown-item
           >
           <b-dropdown-item v-if="hasAdminRoles" to="/usermanagement"
-            >Gestión Usuarios</b-dropdown-item
+            >Usuarios</b-dropdown-item
           >
-          <b-dropdown-item @click="logout">Salir</b-dropdown-item>
+          <b-dropdown-divider v-if="hasAdminRoles"></b-dropdown-divider>
+          <b-dropdown-item to="/login" @click="logout">Salir</b-dropdown-item>
         </b-nav-item-dropdown>
 
         <b-nav-item right to="/login" v-else>
@@ -88,12 +90,6 @@ export default {
   },
   methods: {
     ...mapActions("accountModule", ["logout"]),
-    login() {
-      this.$router.push("login");
-    },
-    handleSearch() {
-      this.$router.push({ name: "Home", query: { search: this.searchQuery } });
-    },
   },
 };
 </script>

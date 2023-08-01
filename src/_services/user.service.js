@@ -84,7 +84,6 @@ function getUserCart(id) {
 }
 
 function updateUserCart(id, cart, cartId) {
-    console.log(cartId)
     return axios.put(`${endpoint}/${id}/cart/${cartId}`, cart)
         .then((response) => { return response.data })
         .catch((err) => { console.error(`${err}`) })

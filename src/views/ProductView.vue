@@ -4,7 +4,7 @@
             <img class="mb-4" :src="product.img">
             <b-row cols="d-flex justify-content-center">
                 <h4 class="my-auto">{{ product.name }}</h4>
-                <b-button @click="addToCart" class="ml-4 my-auto" variant="danger"><b-icon icon="cart"></b-icon></b-button>
+                <b-button @click="addToCart(product)" class="ml-4 my-auto" variant="danger"><b-icon icon="cart"></b-icon></b-button>
             </b-row>
             <hr>
             <p>{{ product.desc }}</p>
@@ -16,6 +16,7 @@
 
 <script>
 import { productService } from '@/_services/product.service';
+import { mapActions } from 'vuex';
 
 export default {
     data() {
@@ -57,6 +58,7 @@ export default {
         this.getProduct();
     },
     methods: {
+        ...mapActions("cartModule", ["addToCart"]),
         getProduct() {
             productService.getProductById(this.id)
                 .then(product => {
@@ -71,9 +73,6 @@ export default {
                     console.error(`${err}`);
                     this.$router.push({ path: "/" });
                 })
-        },
-        addToCart() {
-            this.$emit("addToCart", this.product.id);
         },
     }
 }
