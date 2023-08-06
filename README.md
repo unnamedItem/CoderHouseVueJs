@@ -1,4 +1,4 @@
-# 1er_proyecto_final_cusmai
+# Proyecto final Vue Cusmai Franco
 
 ## Project setup
 ```
@@ -19,6 +19,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
