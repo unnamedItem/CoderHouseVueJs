@@ -51,6 +51,7 @@ export const cartModule = {
         commit("addItem", { idx: productIndex, userId: rootState.accountModule.user.id, cartId: rootState.accountModule.cartId });
       } else {
         let productCopy = JSON.parse(JSON.stringify(product));
+        productCopy.quantity = 1;
         commit("addToCart", { product: productCopy, userId: rootState.accountModule.user.id, cartId: rootState.accountModule.cartId });
       }
     },
