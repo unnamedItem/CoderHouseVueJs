@@ -1,4 +1,10 @@
-# Proyecto final Vue Cusmai Franco
+# Mercado de Juegos
+
+## Proyecto final Vue Cusmai Franco
+
+Proyecto ecommerce orientado a una tienda de juegos de mesa utilizando Vuejs y MockAPI para simular el backend.
+
+## 
 
 ## Project setup
 ```
